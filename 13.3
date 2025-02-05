@@ -1,0 +1,35 @@
+﻿#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+void writeStringsToFile(const vector<string>& strings, const string& filename) {
+    ofstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Ошибка: Не удалось открыть файл " << filename << endl;
+        return;
+    }
+
+    for (const string& str : strings) {
+        file << str << endl;
+    }
+    file.close();
+    cout << "Текст записан в файл " << filename << endl;
+}
+
+int main() {
+    setlocale(LC_ALL, "ru");
+
+    vector<string> strings = {
+        "Первая строка",
+        "Вторая строка",
+        "Третья строка с пробелами",
+        "Четвертаястрокабезпробелов"
+    }; // Пример массива строк
+
+    string filename = "output3.txt"; 
+    writeStringsToFile(strings, filename);
+    return 0;
+}
