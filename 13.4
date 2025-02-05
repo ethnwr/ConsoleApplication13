@@ -1,0 +1,33 @@
+﻿#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int countChars(const string& filename) {
+    ifstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Ошибка: Не удалось открыть файл " << filename << endl;
+        return -1;
+    }
+
+    string line;
+    int count = 0;
+    while (getline(file, line)) {
+        count += line.length();
+    }
+    file.close();
+    return count;
+}
+
+int main() {
+    setlocale(LC_ALL, "ru");
+
+    string filename = "input4.txt"; 
+    int charCount = countChars(filename);
+    if (charCount != -1) {
+        cout << "Количество символов в файле: " << charCount << endl;
+    }
+
+    return 0;
+}
