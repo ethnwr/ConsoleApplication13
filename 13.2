@@ -1,0 +1,43 @@
+﻿#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+void replaceChars(const string& inputFile, const string& outputFile) {
+    ifstream inFile(inputFile);
+    ofstream outFile(outputFile);
+
+    if (!inFile.is_open()) {
+        cerr << "Ошибка: Не удалось открыть файл " << inputFile << endl;
+        return;
+    }
+    if (!outFile.is_open()) {
+        cerr << "Ошибка: Не удалось открыть файл " << outputFile << endl;
+        return;
+    }
+
+    string line;
+    while (getline(inFile, line)) {
+        for (char& c : line) {
+            if (c == '0') {
+                c = '1';
+            }
+            else if (c == '1') {
+                c = '0';
+            }
+        }
+        outFile << line << endl;
+    }
+    inFile.close();
+    outFile.close();
+    cout << "Текст записан в файл " << outputFile << endl;
+}
+
+int main() {
+    setlocale(LC_ALL, "ru");
+    string inputFile = "input2.txt";    
+    string outputFile = "output2.txt";  
+    replaceChars(inputFile, outputFile);
+    return 0;
+}
